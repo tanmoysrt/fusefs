@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"os"
 
 	"github.com/jacobsa/fuse"
 	"github.com/jacobsa/fuse/samples/hellofs"
@@ -19,10 +20,13 @@ func main() {
 	_ = fuse.Unmount("/mnt/test")
 
 	// Mount the file system.
-	mfs, err := fuse.Mount("/mnt/test", server, &fuse.MountConfig{
+	cfg := fuse.MountConfig{
 		ReadOnly: false,
 		FSName:   "hellofs",
-	})
+	}
+	cfg.DebugLogger = log.New(os.Stderr, "fuse: ", 0)
+
+	mfs, err := fuse.Mount("/mnt/test", server, &cfg)
 	if err != nil {
 		log.Fatalf("failed to mount: %v", err)
 	}
