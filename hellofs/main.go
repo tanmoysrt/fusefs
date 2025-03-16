@@ -6,12 +6,11 @@ import (
 	"os"
 
 	"github.com/jacobsa/fuse"
-	"github.com/jacobsa/fuse/samples/hellofs"
 	"github.com/jacobsa/timeutil"
 )
 
 func main() {
-	server, err := hellofs.NewHelloFS(timeutil.RealClock())
+	server, err := NewHelloFS(timeutil.RealClock())
 	if err != nil {
 		log.Fatalf("failed to create hellofs: %v", err)
 	}

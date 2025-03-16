@@ -4,7 +4,6 @@ import (
 	"context"
 	"io"
 	"strings"
-	"time"
 
 	"github.com/jacobsa/fuse"
 	"github.com/jacobsa/fuse/fuseops"
@@ -109,8 +108,6 @@ func (fs *HelloFS) ReadFile(ctx context.Context, op *fuseops.ReadFileOp) error {
 	if err == io.EOF {
 		return nil
 	}
-
-	time.Sleep(time.Second * 20)
 
 	return err
 }
